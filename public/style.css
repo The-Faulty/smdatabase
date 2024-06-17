@@ -1,0 +1,23 @@
+:root {
+  /* Comment this out if you don't want it to switch between light and dark */
+  color-scheme: light dark;
+
+  /* Change these variables to customize the application */
+  --font: initial;
+}
+
+html {
+  font-family: var(--font);
+}
+
+table {
+  border-radius: 5px;
+}
+
+table,
+tr,
+th,
+td {
+  border: 1px solid;
+  border-collapse: collapse;
+}

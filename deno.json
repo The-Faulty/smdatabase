@@ -1,0 +1,17 @@
+{
+  "tasks": {
+    "dev": "deno run -A --watch main.tsx"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "https://esm.sh/preact@10.22.0"
+  },
+  "deploy": {
+    "project": "f14bf08a-910e-445b-9ede-cfe5ed0a3595",
+    "exclude": [
+      "**/node_modules"
+    ],
+    "include": [],
+    "entrypoint": "main.tsx"
+  }
+}
