@@ -6,7 +6,7 @@ export const Projects = () => {
       <Head />
 
       <body>
-        <Header />
+        <Header path="projects" />
 
         <h1>Projects</h1>
       </body>

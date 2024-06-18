@@ -1,10 +1,11 @@
 import { Head, Header } from "./mod.ts";
 
 type Part = {
-  quantity: number;
-  type: string;
+  part: string;
+  quantity?: number;
+  type?: string;
   value: number;
-  footprint?: string;
+  footprint: string;
   location?: string;
   description?: string;
 };
@@ -13,33 +14,57 @@ export const Parts = () => {
   // Example parts list
   const parts: Part[] = [
     {
-      quantity: 1,
-      type: "Board",
+      part: "Test1",
       value: 100,
-    },
-    {
-      quantity: 2,
+      footprint: "Big",
       type: "Computer",
-      value: 5,
+      location: "Home",
+      description: "This is a big computer",
     },
     {
-      quantity: 10,
-      type: "Camera",
-      value: 150,
+      part: "Test2",
+      value: 1000,
+      footprint: "Bigger",
+      description: "This thing big",
+    },
+    {
+      part: "Test3",
+      value: 10000,
+      footprint: "Biggest",
+      location: "The moon",
     },
   ];
 
-  const partsEls: preact.VNode[] = [];
+  const partsList: preact.VNode[] = [];
   parts.forEach((part, index) => {
-    partsEls.push(
+    let key: keyof Part;
+
+    const detailedPartList: preact.VNode[] = [];
+
+    for (key in part) {
+      detailedPartList.push(
+        <p>
+          <small class="small-heading">
+            {key.toLocaleUpperCase()}
+          </small>
+          <br />
+          <input value={part[key]?.toString()} required />
+        </p>,
+      );
+    }
+
+    partsList.push(
       <tr>
-        <td>{part.quantity}</td>
-        <td>{part.type}</td>
+        <td>{part.part}</td>
         <td>{part.value}</td>
+        <td>{part.footprint}</td>
         <td>
           <button class="dialog-open" id={`dialog-open-${index}`}>Open</button>
           <dialog id={`dialog-${index}`}>
-            {part.type}
+            <form>
+              {detailedPartList}
+            </form>
+
             <button class="dialog-close" id={`dialog-close-${index}`}>
               Close
             </button>
@@ -54,32 +79,34 @@ export const Parts = () => {
       <Head />
 
       <body>
-        <Header />
+        <Header path="parts" />
 
         <h1>Parts</h1>
-        <table>
-          <tr>
-            <th>Quantity</th>
-            <th>Type</th>
-            <th>Value</th>
-          </tr>
+        <div style="overflow-x:auto;">
+          <table>
+            <tr>
+              <th>Part</th>
+              <th>Value</th>
+              <th>Footprint</th>
+            </tr>
 
-          {partsEls}
-          <script src="partDialogs.js" type="module" />
+            {partsList}
+            <script src="partDialogs.js" type="module" />
 
-          {/* Form to add new parts */}
-          <tr>
-            <td>
-              <input placeholder={"10"} />
-            </td>
-            <td>
-              <input placeholder={"Part"} />
-            </td>
-            <td>
-              <input placeholder={"50"} />
-            </td>
-          </tr>
-        </table>
+            {/* Form to add new parts */}
+            <tr>
+              <td>
+                <input placeholder={"Part name"} />
+              </td>
+              <td>
+                <input placeholder={"100"} />
+              </td>
+              <td>
+                <input placeholder={"Footprint"} />
+              </td>
+            </tr>
+          </table>
+        </div>
       </body>
     </>
   );

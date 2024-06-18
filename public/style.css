@@ -1,23 +1,129 @@
 :root {
-  /* Comment this out if you don't want it to switch between light and dark */
   color-scheme: light dark;
+  --font: sans-serif;
+}
 
-  /* Change these variables to customize the application */
-  --font: initial;
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: inherit;
+    --primary: black;
+    --secondary: dimgray;
+    --link: royalblue;
+    --ui: lightgray;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: inherit;
+    --primary: white;
+    --secondary: darkgray;
+    --link: dodgerblue;
+    --ui: dimgray;
+  }
 }
 
 html {
   font-family: var(--font);
+  background-color: var(--background);
+  color: var(--primary);
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+header ul {
+  padding: 0;
+}
+
+header ul li {
+  display: inline;
+}
+
+header ul li a {
+  color: var(--secondary);
+}
+
+header ul li a.active {
+  color: var(--primary);
+}
+
+header ul li:not(:last-child) {
+  padding-right: 10px;
+}
+
+header h3 {
+  display: inline;
+  margin: 0;
+  padding-right: 5px;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+header h3 {
+  display: inline;
+  margin: 0;
 }
 
 table {
   border-radius: 5px;
-}
-
-table,
-tr,
-th,
-td {
-  border: 1px solid;
   border-collapse: collapse;
 }
+
+th {
+  text-align: left;
+}
+
+td {
+  border: 1px solid var(--ui);
+  padding: 5px;
+}
+
+td:has(button) {
+  border: 0;
+}
+
+table td input {
+  border: 0;
+  width: auto;
+}
+
+dialog {
+  border: 2px solid var(--ui);
+  border-radius: 5px;
+  width: 100%;
+  max-width: 350px;
+  height: fit-content;
+  float: left;
+}
+
+dialog h4 {
+  margin: 0;
+  display: inline;
+}
+
+dialog .small-heading {
+  color: var(--secondary);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/*input::placeholder {
+  color: var(--secondary);
+}
+
+button {
+  border: 1px solid var(--ui);
+}
+
+input,
+button {
+  color: var(--primary);
+  background: inherit;
+}*/

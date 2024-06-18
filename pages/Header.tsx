@@ -1,13 +1,40 @@
-export const Header = () => {
+type Page = {
+  path: string;
+  title?: string;
+  active?: boolean;
+};
+
+export const Header = ({ path }: { path: string }) => {
+  const pagesList: preact.VNode[] = [];
+
+  /* Here you can edit what pages you have */
+  const pages: Page[] = [
+    { path: "home" },
+    { path: "parts" },
+    { path: "projects" },
+  ];
+
+  pages.forEach((page) => {
+    if (page.path === path) {
+      page.active = true;
+    }
+
+    pagesList.push(
+      <li>
+        <a href={page.path} class={page.active ? "active" : ""}>
+          {page.title ? page.title : page.path}
+        </a>
+      </li>,
+    );
+  });
   return (
     <header>
-      <h3 style="margin:0;">SMDatabase</h3>
-      <nav>
-        [ <a href="home">Home</a> ] [ <a href="parts">Parts</a> ] [{" "}
-        <a href="projects">Projects</a> ]
-      </nav>
-
-      <hr />
+      <ul>
+        <li>
+          <h3>smdatabase</h3>
+        </li>
+        {pagesList}
+      </ul>
     </header>
   );
 };

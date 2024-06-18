@@ -6,7 +6,7 @@ export const Home = () => {
       <Head />
 
       <body>
-        <Header />
+        <Header path="home" />
 
         <h1>Home</h1>
         {/* Add part usage statistics and recent additions */}
