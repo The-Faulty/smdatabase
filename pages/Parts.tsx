@@ -1,4 +1,9 @@
 import { Head, Header } from "./mod.ts";
+//import { Ref, useRef, useState } from "npm:preact/compat";
+import { supabase } from "../tools/supabase.tsx";
+import { Tables } from "../tools/database.types.tsx";
+import { useState } from "npm:preact/compat";
+
 
 type Part = {
   part: string;
@@ -10,9 +15,52 @@ type Part = {
   description?: string;
 };
 
-export const Parts = () => {
+export function Parts() {
+  /*const quantInput: Ref<string> = useRef("");
+  const typeInput: Ref<string> = useRef("");
+  const valInput: Ref<string> = useRef("");
+  const footInput: Ref<string> = useRef("");
+  const locInput: Ref<string> = useRef("");
+  const [status, setStatus] = useState("");
+  const desc: Ref<string> = useRef("");*/
+  const [parts, setParts] = useState<Tables<'parts'>[]>();
+  
+  async function retrieveParts(){
+    const partsList: Tables<"parts">[] = [];
+    const { data, error } = await supabase.from("parts").select();
+    if (error){
+      return (<>
+      error getting parts
+      </>);
+    }
+    
+
+    data.forEach((part: Tables<'parts'>, index: number) => {
+      let key: keyof Tables<"parts">;
+      const detailedPartList: preact.VNode[] = [];
+      
+      for (key in part) {
+        detailedPartList.push(
+          <p>
+            <small class="small-heading">
+              {key.toLocaleUpperCase()}
+            </small>
+            <br />
+            <input value={part[key]?.toString()} required />
+          </p>,
+        );
+      }
+
+      partsList.push(part);
+      //console.log(parts);
+    });
+    setParts(partsList);
+    console.log(partsList);
+  }
+  retrieveParts();
+  
   // Example parts list
-  const parts: Part[] = [
+  /*const parts: Part[] = [
     {
       part: "Test1",
       value: 100,
@@ -33,46 +81,9 @@ export const Parts = () => {
       footprint: "Biggest",
       location: "The moon",
     },
-  ];
+  ];*/
 
-  const partsList: preact.VNode[] = [];
-  parts.forEach((part, index) => {
-    let key: keyof Part;
-
-    const detailedPartList: preact.VNode[] = [];
-
-    for (key in part) {
-      detailedPartList.push(
-        <p>
-          <small class="small-heading">
-            {key.toLocaleUpperCase()}
-          </small>
-          <br />
-          <input value={part[key]?.toString()} required />
-        </p>,
-      );
-    }
-
-    partsList.push(
-      <tr>
-        <td>{part.part}</td>
-        <td>{part.value}</td>
-        <td>{part.footprint}</td>
-        <td>
-          <button class="dialog-open" id={`dialog-open-${index}`}>Open</button>
-          <dialog id={`dialog-${index}`}>
-            <form>
-              {detailedPartList}
-            </form>
-
-            <button class="dialog-close" id={`dialog-close-${index}`}>
-              Close
-            </button>
-          </dialog>
-        </td>
-      </tr>,
-    );
-  });
+  
 
   return (
     <>
@@ -90,7 +101,16 @@ export const Parts = () => {
               <th>Footprint</th>
             </tr>
 
-            {partsList}
+            {parts?.map((part) => {
+              <tr>
+          <td>{part.type}</td>
+          <td>{part.value}</td>
+          <td>{part.footprint}</td>
+          <td>
+            <button class="dialog-open" id={`dialog-open-${part.id}`}>Open</button>
+          </td>
+        </tr>
+            })}
             <script src="partDialogs.js" type="module" />
 
             {/* Form to add new parts */}

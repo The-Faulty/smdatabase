@@ -1,4 +1,4 @@
-const open = document.querySelectorAll("button.dialog-open");
+/*const open = document.querySelectorAll("button.dialog-open");
 const dialog = document.querySelector("dialog");
 const close = document.querySelectorAll("button.dialog-close");
 
@@ -20,3 +20,4 @@ close.forEach((item) => {
     item.parentElement.close();
   });
 });
+*/
