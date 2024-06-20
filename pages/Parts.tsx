@@ -23,7 +23,7 @@ export function Parts() {
   const locInput: Ref<string> = useRef("");
   const [status, setStatus] = useState("");
   const desc: Ref<string> = useRef("");*/
-  const [parts, setParts] = useState<Tables<'parts'>[]>();
+  const [parts, setParts] = useState<Tables<'parts'>[]>([]);
   
   async function retrieveParts(){
     const partsList: Tables<"parts">[] = [];
@@ -55,9 +55,9 @@ export function Parts() {
       //console.log(parts);
     });
     setParts(partsList);
-    console.log(partsList);
   }
   retrieveParts();
+  console.log(parts);
   
   // Example parts list
   /*const parts: Part[] = [

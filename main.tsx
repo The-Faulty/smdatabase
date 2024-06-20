@@ -1,6 +1,5 @@
 import { render } from "npm:preact-render-to-string";
 import { typeByExtension } from "jsr:@std/media-types";
-
 import { EditPart, Home, Parts, Projects } from "./pages/mod.ts";
 
 Deno.serve({
