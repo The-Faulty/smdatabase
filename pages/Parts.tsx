@@ -119,7 +119,7 @@ export function Parts() {
                 <input placeholder={"Part name"} />
               </td>
               <td>
-                <input placeholder={"100"} />
+                <input placeholder={"100n"} />
               </td>
               <td>
                 <input placeholder={"Footprint"} />
