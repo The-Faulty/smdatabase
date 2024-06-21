@@ -1,2 +1,13 @@
+# dotenv environment variable files
 .env
-/.vscode
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# Fresh build directory
+_fresh/
+# npm dependencies
+node_modules/
+
+.vscode
