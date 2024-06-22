@@ -1,6 +1,6 @@
 import { Header } from "@/islands/Header.tsx";
 
-export default function Index() {
+export default function Home() {
   return (
     <>
       <Header path="home" />

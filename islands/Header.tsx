@@ -24,7 +24,7 @@ export const Header = ({ path }: { path: string }) => {
         <a href={page.path} class={page.active ? "active" : ""}>
           {page.title ? page.title : page.path}
         </a>
-      </li>,
+      </li>
     );
   });
   return (
