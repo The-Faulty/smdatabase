@@ -54,7 +54,6 @@ export function PartButton(props: PartButtonProps) {
         <button
           class="dialog-save"
           id={`dialog-save-${props.part.id}`}
-          onClick={}
         >
           Save
         </button>
