@@ -116,12 +116,19 @@ dialog .small-heading {
 
 .dialog-open {
   background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.dialog-save {
+  color: inherit;
+  cursor: pointer;
+  outline: inherit;
+  margin-left: 1rem;
 }
 
 svg path {
