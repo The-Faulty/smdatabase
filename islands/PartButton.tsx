@@ -1,34 +1,45 @@
-import { Tables } from "@/tools/database.types.tsx";
-import { supabase } from "@/tools/supabase.tsx";
+import { Database, Tables } from "@/tools/database.types.tsx";
 
 interface PartButtonProps {
-  part: Tables<"parts">[];
+  part: Tables<"parts">;
+  supabase: any;
 }
 
 export function PartButton(props: PartButtonProps) {
-  var dialogContent: preact.VNode[] = [];
-  //var changes:
+  const dialogContent: preact.VNode[] = [];
+  // deno-lint-ignore no-explicit-any
+  const changes = {} as Tables<"parts"> | any;
 
-  let key: keyof Tables<"parts">;
-  for (key in props.part) {
+  // need this otherwise the input gets split and value line isnt happy
+  // prettier-ignore
+  for (const key in props.part) {
     dialogContent.push(
-      <p>
+      <p key={key}>
         <small class="small-heading">{key.toLocaleUpperCase()}</small>
         <br />
-        <input
-          value={props.part[key]?.toString()}
-          onInput={(e) => (props.part[key] = e.target.value)}
-          required
-        />
+        {/* @ts-ignore  stupid type script isnt happy even though key is from props.part*/}
+        <input value={props.part[key]?.toString()} onInput={(e) => (changes[key] = e.currentTarget.value)} required />
       </p>
     );
   }
 
   async function savePart() {
-    const { error } = await supabase
-      .from("parts")
-      .update({ name: "Australia" })
-      .eq("id", props.part.id);
+    const url = window.location.origin;
+
+    if (!changes.id) {
+      changes.id = props.part.id;
+    }
+
+    const headers = new Headers({
+      "Content-Type": "text/plain",
+    });
+    const opts = {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(changes),
+    };
+    const rawPosts = await fetch(`${url}/api/updatePart`, opts);
+    console.log(rawPosts);
   }
 
   return (
@@ -54,6 +65,7 @@ export function PartButton(props: PartButtonProps) {
         <button
           class="dialog-save"
           id={`dialog-save-${props.part.id}`}
+          onClick={savePart}
         >
           Save
         </button>

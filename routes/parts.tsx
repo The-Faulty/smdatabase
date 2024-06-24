@@ -3,11 +3,18 @@
 import { supabase } from "@/tools/supabase.tsx";
 import { Tables } from "@/tools/database.types.tsx";
 import { Header } from "@/islands/Header.tsx";
-import { PartButton } from "@/components/PartButton.tsx";
+import { PartButton } from "@/islands/PartButton.tsx";
 
 export default async function Parts() {
   const { data, error } = await supabase.from("parts").select();
-  //console.log(data);
+  let parts: Tables<"parts">[] = [];
+  parts = data;
+
+  async function refresh() {
+    const { data, error } = await supabase.from("parts").select();
+    parts = data;
+  }
+
   if (error) {
     console.log(error);
   }
@@ -24,14 +31,14 @@ export default async function Parts() {
             <th>Footprint</th>
           </tr>
 
-          {data.map((part) => {
+          {parts.map((part: Tables<"parts">) => {
             return (
               <tr>
                 <td>{part.type}</td>
                 <td>{part.value}</td>
                 <td>{part.footprint}</td>
                 <td>
-                  <PartButton part={part} />
+                  <PartButton part={part} supabase={supabase} />
                 </td>
               </tr>
             );
