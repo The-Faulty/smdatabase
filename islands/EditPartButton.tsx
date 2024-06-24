@@ -1,18 +1,18 @@
 import { Database, Tables } from "@/tools/database.types.tsx";
+import { PartInfo, PartInfoKeys} from "@/tools/types.tsx"
 
 interface PartButtonProps {
   part: Tables<"parts">;
-  supabase: any;
 }
 
-export function PartButton(props: PartButtonProps) {
+export function EditPartButton(props: PartButtonProps) {
   const dialogContent: preact.VNode[] = [];
   // deno-lint-ignore no-explicit-any
   const changes = {} as Tables<"parts"> | any;
-
+  
   // need this otherwise the input gets split and value line isnt happy
   // prettier-ignore
-  for (const key in props.part) {
+  for (const key of PartInfoKeys) {
     dialogContent.push(
       <p key={key}>
         <small class="small-heading">{key.toLocaleUpperCase()}</small>
