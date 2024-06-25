@@ -5,7 +5,7 @@ import { Tables } from "@/tools/database.types.tsx";
 import { Header } from "@/islands/Header.tsx";
 import { EditPartButton } from "../islands/EditPartButton.tsx";
 import { AddPartButton } from "@/islands/AddPartButton.tsx";
-
+import { PartCSVButton } from "@/islands/PartCSVButton.tsx";
 
 export default async function Parts() {
   const { data, error } = await supabase.from("parts").select();
@@ -25,13 +25,14 @@ export default async function Parts() {
     <>
       <Header path="parts" />
       <h1>Parts</h1>
-      <AddPartButton />
       <div style="overflow-x:auto;">
-        <table>
+        <PartCSVButton />
+        <AddPartButton />
+        <table class="part-table">
           <tr>
-            <th>Part</th>
-            <th>Value</th>
-            <th>Footprint</th>
+            <th class="part-table-head">Part</th>
+            <th class="part-table-head">Value</th>
+            <th class="part-table-head">Footprint</th>
           </tr>
 
           {parts.map((part: Tables<"parts">) => {

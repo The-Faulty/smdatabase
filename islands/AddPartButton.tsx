@@ -1,12 +1,11 @@
-import { Database, Tables } from "@/tools/database.types.tsx";
-import { PartInfo, PartInfoKeys} from "@/tools/types.tsx"
-
+import { Tables } from "@/tools/database.types.tsx";
+import { PartInfoKeys } from "@/tools/types.tsx";
 
 export function AddPartButton() {
   const dialogContent: preact.VNode[] = [];
   // deno-lint-ignore no-explicit-any
   const part = {} as Tables<"parts"> | any;
-  
+
   // need this otherwise the input gets split and value line isnt happy
   // prettier-ignore
   for (const key of PartInfoKeys) {
@@ -37,7 +36,7 @@ export function AddPartButton() {
 
   return (
     <>
-      <button class="dialog-open" id={`dialog-open-add-part`}>
+      <button class="add-part dialog-open" id={`dialog-open-add-part`}>
         + Add Part
       </button>
       <dialog id={`dialog-add-part`}>

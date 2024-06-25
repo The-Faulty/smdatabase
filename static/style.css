@@ -131,6 +131,18 @@ dialog .small-heading {
   margin-left: 1rem;
 }
 
+.add-part {
+  background-color: #23a1eb;
+  padding-left: 0.2rem;
+  padding-right: 0.4rem;
+  border-radius: 0.3rem;
+  float: right;
+}
+
+.part-table {
+  width: 100%;
+}
+
 svg path {
   fill: var(--primary);
 }

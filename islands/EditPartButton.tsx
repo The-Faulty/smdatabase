@@ -1,5 +1,5 @@
 import { Database, Tables } from "@/tools/database.types.tsx";
-import { PartInfo, PartInfoKeys} from "@/tools/types.tsx"
+import { PartInfo, PartInfoKeys } from "@/tools/types.tsx";
 
 interface PartButtonProps {
   part: Tables<"parts">;
@@ -9,7 +9,7 @@ export function EditPartButton(props: PartButtonProps) {
   const dialogContent: preact.VNode[] = [];
   // deno-lint-ignore no-explicit-any
   const changes = {} as Tables<"parts"> | any;
-  
+
   // need this otherwise the input gets split and value line isnt happy
   // prettier-ignore
   for (const key of PartInfoKeys) {
