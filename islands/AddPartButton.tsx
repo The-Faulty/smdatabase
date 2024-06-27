@@ -39,7 +39,7 @@ export function AddPartButton() {
       <button class="add-part dialog-open" id={`dialog-open-add-part`}>
         + Add Part
       </button>
-      <dialog id={`dialog-add-part`}>
+      <dialog id="dialog-add-part">
         <form>{dialogContent}</form>
 
         <button class="dialog-close" id={`dialog-close-add-part`}>
